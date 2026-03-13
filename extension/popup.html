@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Analies</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="logo">
+        <div class="logo-icon">🛡️</div>
+        <h1>Analies
+        </h1>
+      </div>
+      <div id="current-site">Loading...</div>
+    </header>
+
+    <main class="popup-content">
+      <div id="loading-state" class="state-view">
+        <div class="spinner"></div>
+        <p>Analyzing...</p>
+      </div>
+
+      <div id="no-policy-state" class="state-view hidden">
+        <div style="font-size:48px;margin-bottom:16px">🔍</div>
+        <h3>No policy detected</h3>
+        <p>No privacy policy found on this page.</p>
+      </div>
+
+      <div id="results-state" class="state-view hidden">
+        <div class="risk-card" id="risk-card">
+          <div class="risk-score-circle" id="risk-score-circle">
+            <span id="risk-score-value">-</span>
+            <span class="risk-score-label">/10</span>
+          </div>
+          <div class="risk-info">
+            <h2 id="risk-level">Risk Level</h2>
+            <p id="risk-summary">Analyzing...</p>
+          </div>
+        </div>
+
+        <div class="risks-section">
+          <h3>⚠️ Detected Risks (<span id="risk-count">0</span>)</h3>
+          <ul id="risks-list" class="risks-list"></ul>
+        </div>
+
+        <div id="explanations-section" class="explanations-section hidden">
+          <h3>📚 Explanations</h3>
+          <div id="explanations-list" class="explanations-list"></div>
+        </div>
+
+        <details class="history-section">
+          <summary>📊 Recent Activity</summary>
+          <div id="history-list" class="history-list"></div>
+        </details>
+      </div>
+    </main>
+
+    <footer class="popup-footer">
+      <button id="refresh-btn" class="btn btn-sm">🔄 Refresh</button>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
