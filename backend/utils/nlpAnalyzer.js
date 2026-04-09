@@ -1,12 +1,12 @@
-const OpenAI = require('openai');
+const Groq = require('groq-sdk');
 
-const openai = process.env.OPENAI_API_KEY ? new OpenAI({
+const groq = process.env.OPENAI_API_KEY ? new Groq({
   apiKey: process.env.OPENAI_API_KEY
 }) : null;
 
 async function analyzeWithOpenAI(policyText) {
-  if (!openai) {
-    throw new Error('OpenAI API key not configured');
+  if (!groq) {
+    throw new Error('Groq API key not configured');
   }
   
   const truncatedText = policyText.slice(0, 25000);
@@ -35,8 +35,8 @@ Focus on: third-party sharing, tracking, data selling, auto-renewals, biometric 
   const userPrompt = `Analyze this privacy policy:\n\n${truncatedText}`;
 
   try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4-turbo-preview",
+    const completion = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
@@ -52,7 +52,7 @@ Focus on: third-party sharing, tracking, data selling, auto-renewals, biometric 
     return validateAnalysis(analysis);
     
   } catch (error) {
-    console.error('OpenAI analysis failed:', error.message);
+    console.error('Groq analysis failed:', error.message);
     throw error;
   }
 }
